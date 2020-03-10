@@ -1,0 +1,60 @@
+name: 'Social Post'
+author: 'Jo Colina'
+description: 'A simple action to create posts on Social Media'
+
+inputs:
+  MESSAGE_TEMPLATE:
+    description: 'What should be sent? (only text enabled)'
+    required: true
+    default: 'I published a new release to {{ platform_name }}: v${{ github.ref }}!'
+
+  # #######
+  # TWITTER
+  # #######
+  TWITTER_ENABLED:
+    description: 'Should post to twitter?'
+    required: true
+    default: false
+
+  TWITTER_CONSUMER_KEY:
+    description: 'Twitter Consumer Key from your App'
+    required: false
+    default: ''
+
+  TWITTER_CONSUMER_SECRET:
+    description: 'Twitter Consumer Secret from your App'
+    required: false
+    default: ''
+
+  TWITTER_API_KEY:
+    description: 'Twitter API Key from your App'
+    required: false
+    default: ''
+
+  TWITTER_API_SECRET:
+    description: 'Twitter API Secret from your App'
+    required: false
+    default: ''
+
+  # #######
+  # DISCORD
+  # #######
+
+  DISCORD_ENABLED:
+    description: 'Should post to Discord?'
+    required: true
+    default: true
+
+  DISCORD_WEBHOOK:
+    description: 'Discord webhook to post message'
+    required: false
+    default: ''
+
+
+runs:
+  using: 'node12'
+  main: 'index.js'
+
+branding:
+  icon: activity
+  color: blue

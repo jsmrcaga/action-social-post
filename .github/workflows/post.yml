@@ -1,0 +1,19 @@
+name: 'Post Release to Discord'
+
+on:
+  release:
+    types: ['published']
+
+jobs:
+  message_discord:
+    name: 'Send a message to #general whenever I post a release'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          TWITTER_ENABLED: false
+          DISCORD_ENABLED: true
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+

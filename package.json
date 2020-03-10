@@ -1,0 +1,30 @@
+{
+  "name": "action-social-post",
+  "version": "0.0.0",
+  "description": "A simple GitHub action to post to social media",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsmrcaga/action-social-post.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Action",
+    "Action",
+    "Social",
+    "Twitter",
+    "Discord"
+  ],
+  "author": "Jo Colina <jo@jocolina.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsmrcaga/action-social-post/issues"
+  },
+  "homepage": "https://github.com/jsmrcaga/action-social-post#readme",
+  "dependencies": {
+    "fishingrod": "^4.1.0"
+  }
+}
