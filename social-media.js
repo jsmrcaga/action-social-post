@@ -1,6 +1,7 @@
 const PLATFORMS = {
 	discord: require('./platforms/discord'),
-	twitter: require('./platforms/twitter')
+	twitter: require('./platforms/twitter'),
+	slack: require('./platforms/slack'),
 };
 
 class SocialMedia {

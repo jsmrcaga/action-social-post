@@ -5,7 +5,6 @@ const Platform = require('./platform');
 class Twitter extends Platform {
 	constructor() {
 		super('Twitter', [
-			'TWITTER_ENABLED',
 			'TWITTER_CONSUMER_KEY',
 			'TWITTER_CONSUMER_SECRET',
 			'TWITTER_API_KEY',
@@ -14,12 +13,16 @@ class Twitter extends Platform {
 	}
 
 	enabled() {
-		console.error('Twitter coming soon! Sorry!');
+		let enabled = this.input('TWITTER_ENABLED');
+		if(enabled) {
+			console.error('Twitter coming soon! Sorry!');
+		}
 		return false;
 	}
 
 	post() {
 		// Should not be yet called
+		throw new Error('Twitter is not yet available');
 	}
 }
 

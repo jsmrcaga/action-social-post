@@ -8,6 +8,10 @@ class Platform {
 		throw new Error('[Platform] post should be overridden');
 	}
 
+	input(name) {
+		return process.env[`INPUT_${name.toUpperCase()}`];
+	}
+
 	get_response(response) {
 		return {
 			...this,
@@ -15,22 +19,49 @@ class Platform {
 		};
 	}
 
-	get_message() {
-		let template = process.env[`INPUT_MESSAGE_TEMPLATE`] || '';
+	__get_variables() {
 		let variables = {
 			platform_name: this.name
 		};
 
+		return variables;
+	}
+
+	__template(template, variables) {
 		for(let [k, v] of Object.entries(variables)) {
 			let reg = new RegExp(`{{\\s?${k}\\s?}}`, 'gi');
 			template = template.replace(reg, v);
 		}
+		return template;
+	}
 
+	get_default_template(message, variables) {
+		return message;
+	}
+
+	get_template() {
+		let template = this.input(`${this.name.toUpperCase()}_TEMPLATE`);
+		let variables = this.__get_variables();
+		let message = this.get_message();
+
+		if(!template) {
+			return this.get_default_template(message, variables);
+		}
+
+		template = this.__template(template, {...variables, message});
+		return JSON.parse(template);
+	}
+
+	get_message() {
+		let template = this.input(`MESSAGE_TEMPLATE`) || '';
+		let variables = this.__get_variables();
+
+		template = this.__template(template, variables);
 		return template;
 	}
 
 	enabled() {
-		if(!process.env[`INPUT_${this.name.toUpperCase()}_ENABLED`]) {
+		if(!this.input(`${this.name.toUpperCase()}_ENABLED`)) {
 			return false;
 		}
 
@@ -50,6 +81,15 @@ class Platform {
 		}
 
 		return true;
+	}
+
+	send() {
+		let promise = this.post();
+		if(promise && (promise instanceof Promise)) {
+			return promise.then(response => this.get_response(response));
+		}
+
+		return Promise.resolve(this);
 	}
 }
 

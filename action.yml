@@ -39,16 +39,37 @@ inputs:
   # #######
   # DISCORD
   # #######
-
   DISCORD_ENABLED:
     description: 'Should post to Discord?'
     required: true
-    default: true
+    default: false
 
   DISCORD_WEBHOOK:
     description: 'Discord webhook to post message'
     required: false
     default: ''
+
+  # #######
+  # SLACK
+  # #######
+  SLACK_ENABLED:
+    description: 'Should post to Slack?'
+    required: true
+    default: false
+
+  SLACK_OAUTH_TOKEN:
+    description: 'Slack bot token'
+    required: false
+    default: ''
+
+  SLACK_BOT_NAME:
+    description: 'The username the bot will have when sending the message'
+    required: false
+
+  SLACK_CHANNEL:
+    description: 'The channel the bot should post to (the # is required)',
+    required: false,
+    default: '#general'
 
 
 runs:

@@ -8,32 +8,39 @@ class Discord extends Platform {
 		super('Discord', [
 			'DISCORD_WEBHOOK'
 		]);
+
+	}
+
+	get_default_template(message, variables) {
+		return {
+			username: this.input('DISCORD_BOT_NAME'),
+			avatar_url: this.input('DISCORD_BOT_AVATAR'),
+			content: message
+		};
 	}
 
 	post() {
-		let { host, path } = URL.parse(process.env[`INPUT_DISCORD_WEBHOOK`]);
+		let { host, path } = URL.parse(this.input('DISCORD_WEBHOOK'));
 
-		let message = this.get_message();
-		console.log('[Discord] Posting message to discord:', message);
+		let template = this.get_template();
+		console.log('[Discord] Posting message to discord:', template);
+
 		return fishingrod.fish({
 			method: 'POST',
 			host,
 			path,
-			data: {
-				username: process.env.DISCORD_BOT_NAME || 'Release Bot',
-				content: message
-			},
+			data: template,
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		}).then(({ status, response }) => {
-			if(status < 200 || status > 200) {
+			if(status < 200 || status > 299) {
 				console.error(`[Discord] (${status}) Response: `, response);
 				throw new Error('DiscordAPIError');
 			}
 
 			console.log('[Discord] Posted successfully!');
-			return this.get_response(response);
+			return response;
 		}).catch(e => {
 			console.error('[Discord] Error posting to Discord:', e);
 			throw e;
