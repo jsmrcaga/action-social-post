@@ -6,6 +6,7 @@ Post a message from a GitHub Actions workflow run!
 
 ### Enabled
 - Discord
+- Slack
 
 ### Coming soon:
 - Twitter
@@ -32,7 +33,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - uses: jsmrcaga/action-social-post@latest
         with:
           MESSAGE_TEMPLATE: 'Hello {{ platform_name }}!'
 
@@ -140,3 +141,12 @@ Example:
 ### Twitter
 
 For Twitter you'll have to create an app. More info coming as soon as we enable twitter.
+
+# Changelog
+
+## v1.0.0
+* Discord enabled
+
+## v1.1.0
+* Slack enabled
+* Templating enabled
