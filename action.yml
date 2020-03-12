@@ -67,7 +67,7 @@ inputs:
     required: false
 
   SLACK_CHANNEL:
-    description: 'The channel the bot should post to (the # is required)',
+    description: 'The channel the bot should post to (the # is required)'
     required: false,
     default: '#general'
 

@@ -147,6 +147,6 @@ For Twitter you'll have to create an app. More info coming as soon as we enable 
 ## v1.0.0
 * Discord enabled
 
-## v1.1.0
+## v1.1.1
 * Slack enabled
 * Templating enabled
